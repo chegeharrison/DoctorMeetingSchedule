@@ -1,0 +1,26 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block title %} <title>Doctor</title> {% endblock %}
+
+{% block content %} 
+{% include 'home/navbar.html' %}
+<div class="container container-fluids">
+    <h3 class="text-center">Meeting with the Doctors</h3>
+    <div class="row">
+
+            {% for d in doctors %}
+            <div class="col-sm-12 col-md-4 col-lg-4 mt-4 mb-4">
+                <div class="card">
+                    <img  src="/media/{{ d.doctor_image }}" class="card-img-top" alt={{ d.doctor_desc }} width="250px" height="200px">
+                    <div class="card-body">
+                        <h5>{{ d.doctor_name }}</h5>
+                        <p>{{ d.doctor_desc }}</p>
+                        <button class="btn btn-success" style="width:100%">{{ d.available }}</button>
+    
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+    </div>
+</div>
+{% endblock %}

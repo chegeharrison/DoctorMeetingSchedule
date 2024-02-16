@@ -1,0 +1,41 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block title %} <title>Dashboard</title> {% endblock %}
+
+{% block content %} 
+{% include 'home/navbar.html' %}
+<div class="container container-fluids">
+    <h3 class="text-center">Select The Doctor To Meet</h3>
+    <div class="row">
+
+            {% for d in doctors %}
+            <div class="col-sm-12 col-md-4 col-lg-4 mt-4 mb-4">
+                <div class="card">
+                    <img  src="/media/{{ d.doctor_image }}" class="card-img-top" alt={{ d.doctor_desc }} width="250px" height="200px">
+                    <div class="card-body">
+                        <small class="text-primary font-weight-bolder">Profile Id: {{ d.id }}</small>
+                        <h5>{{ d.doctor_name }}</h5>
+                        <p>{{ d.doctor_desc }}</p>
+                        <form action="{% url 'meeting_manager' %}" method="post">
+                            {% csrf_token %}
+
+                            <ul class="list-group list-group-flush">
+                                {% if d.status %}
+                                    <li class="list-group-item bg-success text-white">FREE</li>
+                                    <li class="list-group-item">
+                                        <button class="btn btn-warning" style="width: 100%;"  value="{{ d.id }}" name="meeting">Arrange Meeting</button>
+                                    </li>
+                                {% else %}
+                                    <li class="list-group-item bg-danger text-white">BUSY</li>
+                                    <li class="list-group-item">
+                                        <button class="btn btn-warning" style="width: 100%;" type="submit" value="{{ d.current_meeting_id }}" name="visitor">Current Visitor</button>
+                                    </li>
+                                {% endif %}                   
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

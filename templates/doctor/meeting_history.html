@@ -1,0 +1,43 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block title %} <title>Profile Manager</title> {% endblock %}
+
+{% block content %} 
+{% include 'doctor/meeting_nav.html' %}
+
+</div>
+
+<div class="masthead text-center">
+    <h2 class='text-monospace  mx-5'>Today's Meeting History</h1>
+    <div class="container-fluid text-center">
+        <table class="table table-light">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Meeting Id</th>
+                    <th>Visitor's Name</th>
+                    <th>Visitor's Contact</th>
+                    <th>Doctor's Name</th>
+                    <th>Time In</th>
+                    <th>Time Out</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for meeting in meetings %}
+                    <tr>
+                        <td>{{ meeting.id }}</td>
+                        <td>{{ meeting.visitor_name }}</td>
+                        <td>{{ meeting.visitor_phone }}</td>
+                        <td>{{ meeting.doctor.doctor_name }}</td>
+                        <td>{{ meeting.time_in }}</td>
+                        {% if meeting.time_out %}
+                            <td>{{ meeting.time_out }}</td>
+                        {% else %}
+                            <td class="text-danger text-monospace"><strong>BUSY</strong></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

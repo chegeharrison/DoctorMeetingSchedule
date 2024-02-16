@@ -1,0 +1,63 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block title %} <title>Meeting Form</title> {% endblock %}
+
+{% block content %} 
+{% include 'doctor/meeting_nav.html' %}
+
+</div>
+    <div class="container">
+      <div class="row mx-auto">
+        <div class="col">
+          <div class="card" style="width: 30rem;">
+            <h5 class="card-header bg-info text-monospace text-light text-center"><strong>Visitor's Information</strong></h5>
+  
+            <div class="card-body px-lg-5 mt-2">
+                <!-- fjmslk -->
+                <form class="text-center" action="{% url 'save_meeting' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="md-form">
+                                {{ form.visitor_name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md-form my-3">
+                        {{ form.visitor_email }}
+                    </div>
+                    <div class="md-form my-3">
+                        {{ form.visitor_phone }}
+                    </div>
+                
+                    <button class="btn bg-info btn-rounded my-2 waves-effect z-depth-0 text-light" type="submit" value="{{ doctor.doctor_name }}" name="doctor" style="width: 10rem;">
+                        Check In
+                    </button>
+                </form>
+              <!-- kxjhasjx -->
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card text-dark" style="width: 30rem;">
+            <h5 class="card-header bg-info text-monospace text-light text-center">
+              <strong>Doctor's Information</strong>
+            </h5>
+            <div class="row">
+              <div class="col my-auto">
+                <div class="card-body ">
+                  <h3 class="card-title">{{ doctor.doctor_name }}</h3>
+                  <h5 class="card-text">{{ doctor.doctor_desc }}</h5>
+                </div>
+              </div>
+  
+              <div class="col">
+                <img src="/media/{{ doctor.doctor_image }}" class="card-img-top" alt="...">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+  {% endblock %}
